@@ -350,14 +350,6 @@ btnReset.addEventListener('click', () => {
 
 // Inicialización de la App al cargar
 document.addEventListener('DOMContentLoaded', () => {
-    // Agregar algunas repetidas de ejemplo si no hay ninguna
-    let rep = obtenerRepetidasFrescas();
-    if (Object.keys(rep).length === 0) {
-        rep['GER1'] = 2;
-        rep['ARG5'] = 1;
-        rep['BRA10'] = 3;
-        guardarDatos(obtenerInventarioFresco(), rep);
-    }
     renderizarMatrizMenu();
     actualizarProgresoGlobal();
 });
