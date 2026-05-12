@@ -31,7 +31,10 @@
         <div id="vista-menu" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"></div>
 
         <div id="vista-seccion" class="hidden space-y-4">
-            <h2 id="titulo-seccion-activa" class="text-lg font-semibold text-gray-400 uppercase tracking-wider"></h2>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                <h2 id="titulo-seccion-activa" class="text-lg font-semibold text-gray-400 uppercase tracking-wider"></h2>
+                <div id="seccion-contador" class="text-sm text-gray-400 font-mono"></div>
+            </div>
             <div id="cuadrilla-laminas" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2"></div>
         </div>
 

@@ -62,6 +62,7 @@ const btnVerRepetidas = document.getElementById('btn-ver-repetidas');
 const appTitulo = document.getElementById('app-titulo');
 const cuadrillaLaminas = document.getElementById('cuadrilla-laminas');
 const tituloSeccion = document.getElementById('titulo-seccion-activa');
+const seccionContador = document.getElementById('seccion-contador');
 const listaRepetidasContenedor = document.getElementById('lista-repetidas-contenedor');
 
 let seccionActiva = null;
@@ -160,7 +161,21 @@ function mostrarVistaSeccion() {
     const inv = obtenerInventarioFresco();
     const rep = obtenerRepetidasFrescas();
     const infoSec = SECCIONES_ALBUM[seccionActiva];
+    const totalSeccion = (infoSec.fin - infoSec.inicio) + 1;
+    let obtenidasSeccion = 0;
+    let repetidasSeccion = 0;
+
+    for (let i = infoSec.inicio; i <= infoSec.fin; i++) {
+        const codigo = `${infoSec.prefijo}${i}`;
+        if (inv[codigo]) obtenidasSeccion++;
+        repetidasSeccion += (rep[codigo] || 0);
+    }
+
     tituloSeccion.innerText = `${seccionActiva} (${infoSec.prefijo})`;
+    seccionContador.innerHTML = `
+        <span class="font-bold text-white">${obtenidasSeccion}/${totalSeccion}</span>
+        <span class="text-yellow-300 font-black">🔄 ${repetidasSeccion} rep</span>
+    `;
 
     for (let i = infoSec.inicio; i <= infoSec.fin; i++) {
         const codigo = `${infoSec.prefijo}${i}`;
@@ -221,6 +236,8 @@ function mostrarVistaSeccion() {
         casillaContenedor.appendChild(botonMasRepetida);
         cuadrillaLaminas.appendChild(casillaContenedor);
     }
+
+    actualizarProgresoGlobal();
 }
 
 // 3. VISTA: LISTA DE REPETIDAS ALFABÉTICA
