@@ -2,7 +2,7 @@
 const SECCIONES_ALBUM = {
     "Alemania": { prefijo: "GER", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #000000 33%, #FFCC00 33% 66%, #DD0000 66%)" },
     "Arabia Saudita": { prefijo: "KSA", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #006C35, #228B22)" },
-    "Argelia": { prefijo: "ALG", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #006233 50%, #FFFFFF 50%)\", textoOscuro: true" },
+    "Argelia": { prefijo: "ALG", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #006233 50%, #FFFFFF 50%)", textoOscuro: true },
     "Argentina": { prefijo: "ARG", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #74ACDF 33%, #FFFFFF 33% 66%, #74ACDF 66%)", textoOscuro: true },
     "Australia": { prefijo: "AUS", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #000033, #FF0000, #FFFFFF)" },
     "Austria": { prefijo: "AUT", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #ED2939 33%, #FFFFFF 33% 66%, #ED2939 66%)", textoOscuro: true },
