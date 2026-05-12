@@ -12,7 +12,7 @@ const SECCIONES_ALBUM = {
     "Cabo Verde": { prefijo: "CPV", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #003893, #D21034)" },
     "Canadá": { prefijo: "CAN", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #FF0000 33%, #FFFFFF 33% 66%, #FF0000 66%)", textoOscuro: true },
     "Coca Cola": { prefijo: "CC", inicio: 1, fin: 14, bg: "linear-gradient(135deg, #e60000, #990000)" },
-    "Colombia": { prefijo: "COL", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #FCD116 50%, #003893 50 75%, #CE1126 75%)", textoOscuro: true },
+    "Colombia": { prefijo: "COL", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #FCD116 50%, #003893 50% 75%, #CE1126 75%)", textoOscuro: true },
     "Congo": { prefijo: "CGO", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #006633, #FFCC00, #CE1126)", textoOscuro: true },
     "Corea del Sur": { prefijo: "KOR", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #FFFFFF, #CD2E3A, #057E3F)", textoOscuro: true },
     "Costa de Marfil": { prefijo: "CIV", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #F77F00 33%, #FFFFFF 33% 66%, #009E60 66%)", textoOscuro: true },
