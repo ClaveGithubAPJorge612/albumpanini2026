@@ -73,16 +73,16 @@ const cuadrillaLaminas = document.getElementById('cuadrilla-laminas');
 
 // LocalStorage Fresh Getters
 function obtenerInventarioFresco() {
-    return JSON.parse(localStorage.getItem('panini_inventario')) || {};
+    return JSON.parse(localStorage.getItem('panini_2026')) || {};
 }
 
 function obtenerRepetidasFrescas() {
-    return JSON.parse(localStorage.getItem('panini_repetidas')) || {};
+    return JSON.parse(localStorage.getItem('panini_2026_rep')) || {};
 }
 
 function guardarDatos(inv, rep) {
-    localStorage.setItem('panini_inventario', JSON.stringify(inv));
-    localStorage.setItem('panini_repetidas', JSON.stringify(rep));
+    localStorage.setItem('panini_2026', JSON.stringify(inv));
+    localStorage.setItem('panini_2026_rep', JSON.stringify(rep));
 }
 
 // 1. VISTA: MENÚ DE MATRICES PRINCIPALES
@@ -237,34 +237,72 @@ if (btnVerRepetidas) {
         btnVolver.classList.remove('hidden');
         vistaRepetidas.classList.remove('hidden');
         
-        const contenedorRep = document.getElementById('lista-repetidas-items');
+        const contenedorRep = document.getElementById('lista-repetidas-contenedor');
         if (!contenedorRep) return;
         contenedorRep.innerHTML = '';
         
         const rep = obtenerRepetidasFrescas();
-        let totalUnidades = 0;
-        
-        Object.keys(rep).sort().forEach(codigo => {
-            const cantidad = rep[codigo];
-            if (cantidad > 0) {
-                totalUnidades += cantidad;
-                const item = document.createElement('div');
-                item.className = "flex justify-between items-center bg-gray-900 p-3 rounded-xl border border-gray-800";
-                item.innerHTML = `
-                    <span class="font-mono font-bold text-yellow-500">${codigo}</span>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-gray-800 px-2 py-1 rounded text-xs font-mono text-gray-400">${cantidad} und</span>
+        const paisesOrdenados = Object.keys(SECCIONES_ALBUM).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+        let flagContadorVacio = true;
+
+        paisesOrdenados.forEach(pais => {
+            const info = SECCIONES_ALBUM[pais];
+            let laminasRepetidasDeEstePais = [];
+
+            for (let i = info.inicio; i <= info.fin; i++) {
+                const codigo = `${info.prefijo}${i}`;
+                if (rep[codigo] > 0) {
+                    laminasRepetidasDeEstePais.push({ num: i, cod: codigo, cant: rep[codigo] });
+                }
+            }
+
+            if (laminasRepetidasDeEstePais.length > 0) {
+                flagContadorVacio = false;
+                const bloquePais = document.createElement('div');
+                bloquePais.className = "p-4 bg-gray-900 border border-gray-800 rounded-2xl space-y-2 shadow-sm";
+                
+                bloquePais.innerHTML = `
+                    <div class="flex items-center gap-2 border-b border-gray-800 pb-2">
+                        <div class="w-6 h-4 rounded shadow-sm" style="background: ${info.bg}"></div>
+                        <h3 class="font-bold text-sm text-yellow-400 uppercase tracking-wider">${pais}</h3>
                     </div>
+                    <div class="flex flex-wrap gap-2 pt-1" id="frenos-${info.prefijo}"></div>
                 `;
-                contenedorRep.appendChild(item);
+                
+                contenedorRep.appendChild(bloquePais);
+                const contenedorFichas = document.getElementById(`frenos-${info.prefijo}`);
+
+                laminasRepetidasDeEstePais.forEach(item => {
+                    const ficha = document.createElement('div');
+                    ficha.className = "flex items-center gap-2 bg-gray-800 border border-gray-700 px-3 py-1.5 rounded-xl font-mono text-xs font-bold";
+                    ficha.innerHTML = `
+                        <span class="text-gray-400">${item.cod}</span>
+                        <span class="bg-yellow-500 text-gray-950 px-1.5 py-0.2 rounded font-black">x${item.cant}</span>
+                        <button class="text-red-400 font-bold hover:text-red-300 ml-1 px-1 bg-red-500/10 rounded">✕</button>
+                    `;
+
+                    ficha.querySelector('button').addEventListener('click', () => {
+                        let actualRep = obtenerRepetidasFrescas();
+                        
+                        if (actualRep[item.cod] > 0) {
+                            actualRep[item.cod]--;
+                            guardarDatos(obtenerInventarioFresco(), actualRep);
+                            actualizarProgresoGlobal();
+                            // Recargar la vista
+                            btnVerRepetidas.click();
+                        }
+                    });
+
+                    contenedorFichas.appendChild(ficha);
+                });
             }
         });
-        
-        if (totalUnidades === 0) {
+
+        if (flagContadorVacio) {
             contenedorRep.innerHTML = `
-                <div class="text-center py-10 text-gray-600">
-                    <p class="text-3xl mb-2">🔄</p>
-                    <p class="text-sm">No tienes láminas repetidas marcadas aún.</p>
+                <div class="text-center py-12 text-gray-500 font-medium">
+                    <p class="text-lg">No tienes láminas repetidas aún. 🤞</p>
+                    <p class="text-xs text-gray-600 mt-1">Usa el botón "+" en las secciones para añadirlas.</p>
                 </div>
             `;
         }
@@ -303,6 +341,14 @@ btnVolver.addEventListener('click', () => {
 
 // Inicialización de la App al cargar
 document.addEventListener('DOMContentLoaded', () => {
+    // Agregar algunas repetidas de ejemplo si no hay ninguna
+    let rep = obtenerRepetidasFrescas();
+    if (Object.keys(rep).length === 0) {
+        rep['GER1'] = 2;
+        rep['ARG5'] = 1;
+        rep['BRA10'] = 3;
+        guardarDatos(obtenerInventarioFresco(), rep);
+    }
     renderizarMatrizMenu();
     actualizarProgresoGlobal();
 });
