@@ -339,6 +339,15 @@ btnVolver.addEventListener('click', () => {
     renderizarMatrizMenu(); // Vuelve a la matriz de forma limpia recalculando los datos y borrando elementos previos
 });
 
+const btnReset = document.getElementById('btn-reset');
+btnReset.addEventListener('click', () => {
+    if (confirm('¿Estás seguro de que quieres borrar todos los datos? Esto eliminará todas las láminas marcadas y repetidas.')) {
+        localStorage.removeItem('panini_2026');
+        localStorage.removeItem('panini_2026_rep');
+        location.reload(); // Recarga la página para reiniciar la app
+    }
+});
+
 // Inicialización de la App al cargar
 document.addEventListener('DOMContentLoaded', () => {
     // Agregar algunas repetidas de ejemplo si no hay ninguna
