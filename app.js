@@ -43,7 +43,7 @@ const SECCIONES_ALBUM = {
     "Qatar": { prefijo: "QAT", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #8A1538, #7A102F)" },
     "República Checa": { prefijo: "CZE", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #FFFFFF 50%, #D7141A 50%)", textoOscuro: true },
     "Senegal": { prefijo: "SEN", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #FCD116, #00853F, #E31B23)", textoOscuro: true },
-    "Sudafrica":{ prefijo: "RSA" inicio: 1, fin: 20, bg: "linear-graduent(135deg, #FCD115, #00854F, #E31B23)", textoOscuro: true },
+    "Sudafrica":{ prefijo: "RSA", inicio: 1, fin: 20, bg: "linear-graduent(135deg, #FCD115, #00854F, #E31B23)", textoOscuro: true },
     "Suecia": { prefijo: "SWE", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #006AA7, #FECC00)", textoOscuro: true },
     "Suiza": { prefijo: "SUI", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #D52B1E, #A31D14)" },
     "Túnez": { prefijo: "TUN", inicio: 1, fin: 20, bg: "linear-gradient(135deg, #E71D23, #C3191E)" },
